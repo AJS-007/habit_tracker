@@ -1,0 +1,338 @@
+/* ─── Heatmap Card Container ─── */
+.card {
+  background: #0d1117;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+}
+
+/* ─── Header ─── */
+.headerInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.stats {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.statNumber {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #39d353, #26a641);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: #8b949e;
+  font-weight: 400;
+}
+
+/* ─── Scroll Container ─── */
+.scrollContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 0.25rem;
+
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  height: 4px;
+}
+.scrollContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollContainer::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+.scrollContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Main Grid Area ─── */
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: max-content;
+}
+
+/* ─── Month Labels Row ─── */
+.months {
+  display: grid;
+  grid-auto-columns: var(--cell-size, 14px);
+  grid-auto-flow: column;
+  gap: var(--cell-gap, 3px);
+  margin-left: calc(30px + var(--cell-gap, 3px));
+  margin-bottom: 6px;
+  height: 16px;
+}
+
+.month {
+  font-size: 0.7rem;
+  color: #8b949e;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+/* ─── Grid Wrapper (day labels + cells) ─── */
+.gridWrapper {
+  display: flex;
+  gap: var(--cell-gap, 3px);
+}
+
+.dayLabels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cell-gap, 3px);
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.dayLabels span {
+  height: var(--cell-size, 14px);
+  display: flex;
+  align-items: center;
+  font-size: 0.65rem;
+  color: #8b949e;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* ─── Heatmap Grid ─── */
+.grid {
+  display: flex;
+  gap: var(--cell-gap, 3px);
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cell-gap, 3px);
+}
+
+/* ─── Cells ─── */
+.cell {
+  width: var(--cell-size, 14px);
+  height: var(--cell-size, 14px);
+  border-radius: 3px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease;
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  cursor: default;
+  position: relative;
+  animation: cellFadeIn 0.4s ease backwards;
+}
+
+.cell:hover {
+  transform: scale(1.25);
+  z-index: 10;
+  outline: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.08);
+}
+
+.pad {
+  width: var(--cell-size, 14px);
+  height: var(--cell-size, 14px);
+  border-radius: 3px;
+  visibility: hidden;
+}
+
+/* ─── Intensity Levels ─── */
+.empty {
+  background-color: #161b22;
+}
+
+.l1 {
+  background-color: #0e4429;
+}
+
+.l2 {
+  background-color: #006d32;
+}
+
+.l3 {
+  background-color: #26a641;
+}
+
+.l4 {
+  background-color: #39d353;
+}
+
+/* Glow on hover for active cells */
+.l1:hover { box-shadow: 0 0 8px rgba(14, 68, 41, 0.6); }
+.l2:hover { box-shadow: 0 0 8px rgba(0, 109, 50, 0.6); }
+.l3:hover { box-shadow: 0 0 8px rgba(38, 166, 65, 0.6); }
+.l4:hover { box-shadow: 0 0 10px rgba(57, 211, 83, 0.6); }
+
+/* ─── Fade-in Animation ─── */
+@keyframes cellFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ─── Custom Tooltip ─── */
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  background: #1c2128;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.75rem;
+  color: #e6edf3;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.tooltipVisible {
+  opacity: 1;
+}
+
+.tooltipCount {
+  font-weight: 700;
+  color: #39d353;
+}
+
+.tooltipDate {
+  color: #8b949e;
+  margin-left: 0.25rem;
+}
+
+/* ─── Footer / Legend ─── */
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legendLabel {
+  font-size: 0.7rem;
+  color: #8b949e;
+  font-weight: 500;
+  margin: 0 4px;
+}
+
+.legendCell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* ─── Responsive Sizing ─── */
+/* Desktop (default) */
+.card {
+  --cell-size: 14px;
+  --cell-gap: 3px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .card {
+    --cell-size: 12px;
+    --cell-gap: 2px;
+    padding: 1.25rem;
+  }
+
+  .statNumber {
+    font-size: 1.5rem;
+  }
+
+  .statLabel {
+    font-size: 0.85rem;
+  }
+
+  .months {
+    margin-left: calc(26px + var(--cell-gap));
+  }
+
+  .dayLabels {
+    width: 26px;
+  }
+
+  .dayLabels span {
+    font-size: 0.6rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .card {
+    --cell-size: 9px;
+    --cell-gap: 2px;
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .statNumber {
+    font-size: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 0.8rem;
+  }
+
+  .months {
+    margin-left: calc(22px + var(--cell-gap));
+    margin-bottom: 4px;
+  }
+
+  .month {
+    font-size: 0.6rem;
+  }
+
+  .dayLabels {
+    width: 22px;
+  }
+
+  .dayLabels span {
+    font-size: 0.55rem;
+  }
+
+  .legendCell {
+    width: 10px;
+    height: 10px;
+  }
+}
