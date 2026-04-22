@@ -1,0 +1,70 @@
+[
+  {
+    "id": "0361e380-5243-4521-abb3-dcd286ebd0c3",
+    "name": "drink water",
+    "completedDates": [
+      {
+        "date": "2026-04-21",
+        "note": "tasty"
+      },
+      {
+        "date": "2026-04-22",
+        "note": "done"
+      }
+    ],
+    "createdAt": "2026-04-12",
+    "category": "General",
+    "shields": 0
+  },
+  {
+    "id": "05b2f061-07d0-49e2-98ba-fd9d7c2b5c29",
+    "name": "Morning Meditation",
+    "category": "Mindfulness",
+    "completedDates": [
+      {
+        "date": "2026-04-21",
+        "note": "Felt peaceful"
+      },
+      {
+        "date": "2026-04-22",
+        "note": "done"
+      }
+    ],
+    "shields": 0,
+    "createdAt": "2026-04-21"
+  },
+  {
+    "id": "ea2d0004-ff24-40f1-b5b9-997e38b8f2a3",
+    "name": "Read 30 minutes",
+    "category": "General",
+    "completedDates": [
+      {
+        "date": "2026-04-21",
+        "note": "fun"
+      },
+      {
+        "date": "2026-04-22",
+        "note": "h"
+      }
+    ],
+    "shields": 0,
+    "createdAt": "2026-04-21"
+  },
+  {
+    "id": "90bf4d8a-e096-4a9d-a8bb-c59013dd1186",
+    "name": "Read 30 minutes",
+    "category": "General",
+    "completedDates": [
+      {
+        "date": "2026-04-21",
+        "note": "fun"
+      },
+      {
+        "date": "2026-04-22",
+        "note": "g"
+      }
+    ],
+    "shields": 0,
+    "createdAt": "2026-04-21"
+  }
+]
