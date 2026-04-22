@@ -1,6 +1,8 @@
 # Dependencies
 node_modules/
 .pnpm-store/
+.pnp
+.pnp.*
 
 # IDE / OS
 .vscode/
@@ -13,15 +15,31 @@ node_modules/
 
 # Environment
 .env
+.env*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
 # Next.js
+.next/
+out/
 frontend_next/.next/
 frontend_next/out/
 
 # Build outputs
 dist/
 build/
+/coverage
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Misc
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+*.pem

@@ -63,4 +63,3 @@ The application will be available at:
 5. **Protect Streaks**: Use earned shields to bridge gaps in your routine without losing your streak.
 
 Happy tracking!
-
